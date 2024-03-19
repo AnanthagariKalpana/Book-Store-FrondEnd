@@ -6,7 +6,9 @@ const Dashboard = () => {
     return (
         <div>
             <Header/>
-            <Outlet></Outlet>
+            <div>
+                <Outlet/>
+             </div>
         </div>
     )
 }
