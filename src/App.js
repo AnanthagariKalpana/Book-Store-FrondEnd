@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard';
 const AppRoutes = createBrowserRouter([
   {
     path :"/",
-    element : <Dashboard/>
+    element : <Dashboard/>,
   }
 ])
 function App() {

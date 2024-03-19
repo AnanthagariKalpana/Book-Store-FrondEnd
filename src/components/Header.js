@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useNavigate } from "react-router-dom";
+
 import '../styles/Header.scss'
 
 const Header = () => {
