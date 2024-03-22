@@ -2,6 +2,7 @@ import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 import './App.css';
 import Dashboard from './components/Dashboard';
 import  BookContainer  from './components/BookContainer';
+import BookInfo from './components/BookInfo';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -9,9 +10,13 @@ const AppRoutes = createBrowserRouter([
     element : <Dashboard/>,
     children: [
       { 
-        path: "/books", 
+        path: "/", 
         element: <BookContainer />
       },
+      {
+        path:"book/:_id",
+        element:<BookInfo/>
+      }
     ]
   }
 ])

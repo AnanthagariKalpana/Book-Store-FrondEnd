@@ -1,0 +1,60 @@
+.book-info {
+    display: flex;
+    flex-direction: row;
+  }
+  .left-div{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 40px;
+    align-items: center;
+    gap: 30px;
+  }
+  .b-div{
+    height: 200px;
+    border: solid 2px black;
+    padding: 15px;
+
+  }
+  .b-photo{
+    height: 200px;
+  }
+  .b-n{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  .cart-b{
+    width: 20%;
+    background-color:#A03037;
+    color: aliceblue;
+    border: none;
+    height: 30px;
+    border-radius: 2px;
+  }
+  .wish-b{
+    width: 20%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333333;
+    color: aliceblue;
+    border: none;
+    border-radius: 2px;
+    gap: 10px;
+
+  }
+  .right-div{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 40px;
+
+  }
+  .book-name{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }

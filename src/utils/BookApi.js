@@ -7,13 +7,20 @@ export const getAllBooks = async (endpoint) => {
     try {
         const token = localStorage.getItem('Authorization');
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-         };
-        const res = await axios.get(baseURL+"book",config);
+    
+        const res = await axios.get(baseURL+"book");
+      return res.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  export const getBook = async (endpoint) => {
+    try {
+        const token = localStorage.getItem('Authorization');
+
+    
+        const res = await axios.get(baseURL+endpoint);
       return res.data.data;
     } catch (error) {
       console.log(error);

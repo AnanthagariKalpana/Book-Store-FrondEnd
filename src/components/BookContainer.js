@@ -17,21 +17,21 @@ const BookContainer = () => {
   //const dispatch = useDispatch();
   //const bookList = useSelector((store) => store.book.searchData);
 
-    const handleBookNavigate = (book)=>{
-        navigate(`/book/${book._id}`)
-    }
+  const handleBookNavigate = (book) => {
+    navigate(`/book/${book._id}`)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getAllBooks();
       console.log(res);
-    //   dispatch(setBookData(res.data.data))
-        setBookList([...res]);
+      //   dispatch(setBookData(res.data.data))
+      setBookList([...res]);
     };
     fetchData();
   }, []);
 
- 
+
 
   // Logic for pagination
   const indexOfLastBook = currentPage * booksPerPage;
@@ -47,20 +47,20 @@ const BookContainer = () => {
     setSelectedSort(event.target.value);
     setCurrentPage(1); // Reset current page when changing filter
   };
-  
- 
+
+
 
   let sortedList;
   if (selectedSort === "Price: low to high") {
-    sortedList=[...bookList].sort((a, b) => a.discountPrice - b.discountPrice);
+    sortedList = [...bookList].sort((a, b) => a.discountPrice - b.discountPrice);
   } else if (selectedSort === "Price: high to low") {
-    sortedList=[...bookList].sort((a, b) => b.discountPrice - a.discountPrice);
+    sortedList = [...bookList].sort((a, b) => b.discountPrice - a.discountPrice);
   }
-  else{
-    sortedList=[...bookList]
+  else {
+    sortedList = [...bookList]
   }
 
-console.log(bookList,"in state");
+  console.log(bookList, "in state");
   return (
     <>
       <div className="cnt">
@@ -80,7 +80,7 @@ console.log(bookList,"in state");
         </div>
         <div className="books-div">
           {sortedList.slice(indexOfFirstBook, indexOfLastBook).map((book) => (
-            <BookCard key={book._id} book={book} handleBookNavigate={handleBookNavigate}/>
+            <BookCard key={book._id} book={book} handleBookNavigate={handleBookNavigate} />
           ))}
         </div>
         <Pagination
