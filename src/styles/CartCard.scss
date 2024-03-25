@@ -1,0 +1,21 @@
+.cartcard{
+    display: flex;
+}
+.cartcard-img{
+width: 30%;
+}
+.cartcard-detail{
+    width: 70%;
+
+}
+.c-img{
+    width: 80px;
+}
+.cartcard-a{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.cartcard-c{
+    font-size: 18px;
+}

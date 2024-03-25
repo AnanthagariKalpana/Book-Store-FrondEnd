@@ -3,6 +3,7 @@ import './App.css';
 import Dashboard from './components/Dashboard';
 import  BookContainer  from './components/BookContainer';
 import BookInfo from './components/BookInfo';
+import Cart from './components/Cart';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -16,6 +17,9 @@ const AppRoutes = createBrowserRouter([
       {
         path:"book/:_id",
         element:<BookInfo/>
+      },{
+        path:"cart",
+        element:<Cart/>
       }
     ]
   }

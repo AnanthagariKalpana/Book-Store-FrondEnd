@@ -11,19 +11,19 @@
     gap: 30px;
   }
   .b-div{
-    height: 200px;
-    border: solid 2px black;
+    height: 300px;
+    border: solid 2px rgb(183, 178, 178);
     padding: 15px;
 
   }
   .b-photo{
-    height: 200px;
+    height: 300px;
   }
   .b-n{
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 50px;
   }
   .cart-b{
     width: 20%;
@@ -53,8 +53,53 @@
     margin-top: 40px;
 
   }
+  .right-div-1{
+    gap: 10px;
+
+  }
   .book-name{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    gap: 10px;
+    padding: 10px;
+  }
+  .div-rating{
+    display: flex;
+    gap: 10px;
+    width: 40%;
+    
+  }
+  .price{
+    font-size: 25px;
+    padding: 10px; 
+  }
+  .lorem{
+   font-size: 12px;
+   align-items: center;
+   width: 100%;
+  }
+  .b-details{
+    border-top: 2px solid rgb(198, 194,194); ;
+    border-bottom: 2px solid rgb(198, 194,194);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+  }
+  .book-d{
+    font-size: medium;
+    display: block;
+  }
+  .no-rating{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: 100px;
+  }
+  .review-div{
+    padding: 10px;
   }
