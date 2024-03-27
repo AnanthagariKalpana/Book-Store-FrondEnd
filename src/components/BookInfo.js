@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBook } from "../utils/BookApi";
+import { getBook, getCart, updateCart } from "../utils/BookApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
@@ -19,6 +19,8 @@ const BookInfo = () => {
     const [book, setBook] = useState([]);
     const navigate = useNavigate();
 
+    const status = localStorage.getItem("Token") ? true : false;
+
     useEffect(() => {
 
         const fetchData = async () => {
@@ -26,9 +28,21 @@ const BookInfo = () => {
             const res = await getBook(`book/${books._id}`);
             console.log(res);
             setBook(res)
+            if (status) {
+                const result = await getCart("/cart");
+                console.log(result);
+            }
         }
         fetchData();
-    }, [])
+    }, []);
+
+    const handleCart = async () => {
+        console.log("hhhhh");
+        console.log(status);
+        if (status) {
+            await updateCart(`/cart/${book._id}`);
+        }
+    }
 
     return (
         <div>
@@ -38,16 +52,24 @@ const BookInfo = () => {
                         <img src={book.bookImage} alt="book" className="b-photo" />
                     </div>
                     <div className="b-n">
-                        <button className="cart-b">Add to Cart</button>
-                        <button className="wish-b"> <FavoriteIcon sx={{fontSize:"15px", display:"flex", width:"15px"}}></FavoriteIcon>Wishlist</button>
-,
+                        {status ? (
+                            <button className="cart-b" onClick={() => handleCart()}>
+                                Add to Cart
+                            </button>
+                        ) : (
+                            <button className="cart-b" onClick={() => handleCart()}>
+                                Add to Cart
+                            </button>
+                        )}
+                        <button className="wish-b"> <FavoriteIcon sx={{ fontSize: "15px", display: "flex", width: "15px" }}></FavoriteIcon>Wishlist</button>
+                        ,
                     </div>
                 </div>
 
                 <div className="right-div">
                     <div className="right-div-1">
                         <div className="book-name">
-                            <span style={{fontSize:"25px"}}>{book.bookName}</span>
+                            <span style={{ fontSize: "25px" }}>{book.bookName}</span>
                             <span>{book.author}</span>
                         </div>
                         <div className="div-rating">
@@ -79,15 +101,15 @@ const BookInfo = () => {
                         <div><h2>Customer Feedback</h2></div>
                         <div className="no-rating">
                             <span>overall rating</span>
-                        <Rating name="no-value" value={null} />
+                            <Rating name="no-value" value={null} />
                         </div>
 
                     </div>
                     <div className="review-div">
                         <span>review</span>
-                    <div>
-                    <Rating name="read-only" value={3} readOnly />
-                    </div>
+                        <div>
+                            <Rating name="read-only" value={3} readOnly />
+                        </div>
                     </div>
 
                 </div>

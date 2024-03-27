@@ -11,13 +11,11 @@ const CartCard =(props)=>{
 
     useEffect(() => {
       const fetchData = async () => {
-        const result = await getBook(`book/${books.bookId}`);
+        const result = await getBook(`book/${books.book_id}`);
         setBookData(result);
       };
       fetchData();
     }, []);
-
-   
 
 
       return(
@@ -28,7 +26,7 @@ const CartCard =(props)=>{
             </div>
             <div className="cartcard-detail">
             <div className="cartcard-a">
-                            <span style={{fontSize:"20px"}}>{books.bookName}</span>
+                            <span style={{fontSize:"20px"}}>book.bookName</span>
                             <span style={{fontSize:"12px"}}>book.author</span>
                         </div>
                         <div className="cartcard-b">

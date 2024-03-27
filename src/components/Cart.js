@@ -10,6 +10,9 @@ const Cart = () => {
 
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
+    const [isCart, setIsCart] = useState(false);
+
+
     const status = localStorage.getItem("Token") ? true : false;
 
     useEffect(() => {
@@ -18,7 +21,14 @@ const Cart = () => {
             if (status) {
                 const res = await getCart("/card")
                 console.log(res, "111111111");
-                setCart(res);
+                if(res.data?.bookItems)
+                {
+                    setCart(res.data.bookItems);
+                    if(res.data.bookItems.length>0)
+                    {
+                        setIsCart(true);
+                    }
+                }
             }
         };
         fetchData();
@@ -32,7 +42,13 @@ const Cart = () => {
                     <div className="cart-a">
                         <span>My Cart ({cart.length})</span>
                         <div className="cart-disp">
-                            <CartCard />
+                            {isCart ? (
+                                cart.map((book)=>(<CartCard key={book._id} book={book}/>)
+                            )):(
+                                <div>
+                                    <span>No Items in Cart</span>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="cart-p">

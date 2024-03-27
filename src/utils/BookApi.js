@@ -58,6 +58,7 @@ export const getAllBooks = async (endpoint) => {
         Authorization: `Bearer ${localStorage.getItem("Token")}`,
       };
       const response = await axios.post(baseURL + endpoint, {}, { headers: header } );
+      console.log(response);
       const bookData = response.data;
   
       return bookData;

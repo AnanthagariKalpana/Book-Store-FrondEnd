@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import  BookContainer  from './components/BookContainer';
 import BookInfo from './components/BookInfo';
 import Cart from './components/Cart';
+import Login from './components/Login';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const AppRoutes = createBrowserRouter([
         path:"cart",
         element:<Cart/>
       }
-    ]
+    ],
+  },
+  {
+  path:"/login",
+    element:<Login/>
   }
 ])
 function App() {
