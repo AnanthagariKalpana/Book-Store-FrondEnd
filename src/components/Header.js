@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ImportContactsTwoToneIcon from '@mui/icons-material/ImportContactsTwoTone';
 import SearchIcon from "@mui/icons-material/Search";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -6,13 +6,22 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import '../styles/Header.scss'
+import { useNavigate } from 'react-router-dom';
+import Login from './Login';
 
 const Header = () => {
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
 
     return (
         <div>
             <div className="head">
-                <div className="name">
+                <div className="name" onClick={()=> navigate("")}>
                     <div className="logo-div">
                         {/* <img
                             src={logo}
@@ -40,13 +49,13 @@ const Header = () => {
                         type="search"
                         placeholder="Search..."
                         onChange={(e) => {
-                            //dispatch(filterBookData(e.target.value));
+                            // dispatch(filterBookData(e.target.value));
                         }}
                     />
                 </div>
 
                 <div className="right-icons">
-                    <div className="profile" >
+                    <div className="profile" onClick={handleClick}>
                         <div>
                             <PersonOutlineOutlinedIcon
                                 sx={{ color: "#FFFFFF" }}
@@ -59,6 +68,7 @@ const Header = () => {
                         <div>
                             <ShoppingCartOutlinedIcon
                                 sx={{ color: "#FFFFFF" }}
+                                onClick={()=> navigate("/cart")}
                             ></ShoppingCartOutlinedIcon>
                         </div>
                         <span style={{ color: "#FFFFFF", fontSize: "12px" }}>Cart</span>

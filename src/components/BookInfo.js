@@ -17,6 +17,7 @@ const BookInfo = () => {
     const books = useParams()
     console.log(books);
     const [book, setBook] = useState([]);
+    const[Quantity, setQuantity]=useState(1);
     const navigate = useNavigate();
 
     const status = localStorage.getItem("Token") ? true : false;
@@ -30,7 +31,7 @@ const BookInfo = () => {
             setBook(res)
             if (status) {
                 const result = await getCart("/cart");
-                console.log(result);
+                console.log(result,"000000000");
             }
         }
         fetchData();
@@ -41,7 +42,7 @@ const BookInfo = () => {
         console.log(status);
         if (status) {
             await updateCart(`/cart/${book._id}`);
-        }
+        }   
     }
 
     return (

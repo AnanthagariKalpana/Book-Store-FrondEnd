@@ -5,14 +5,20 @@ import  BookContainer  from './components/BookContainer';
 import BookInfo from './components/BookInfo';
 import Cart from './components/Cart';
 import Login from './components/Login';
+import BookStore from './utils/store-redux/BookStore.js'
+import { Provider } from 'react-redux';
 
 const AppRoutes = createBrowserRouter([
   {
-    path :"/",
+    path:"/",
+      element:<Login/>
+    },
+    {
+    path :"dash",
     element : <Dashboard/>,
     children: [
       { 
-        path: "/", 
+        path: "book", 
         element: <BookContainer />
       },
       {
@@ -24,14 +30,14 @@ const AppRoutes = createBrowserRouter([
       }
     ],
   },
-  {
-  path:"/login",
-    element:<Login/>
-  }
+  
 ])
 function App() {
   return (
-    <RouterProvider router ={AppRoutes}></RouterProvider>
+    <Provider store={BookStore}>
+
+      <RouterProvider router ={AppRoutes}></RouterProvider>
+    </Provider>
   );
 }
 

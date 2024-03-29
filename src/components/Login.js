@@ -50,9 +50,9 @@ const Login = (props) => {
     }
   };
 
-//   const handleClose = () => {
-//     onClose(selectedValue);
-//   };
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
 
 
   const handleNavigate = () => {

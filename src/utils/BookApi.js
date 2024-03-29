@@ -37,13 +37,9 @@ export const getAllBooks = async (endpoint) => {
       console.log("Endpoint:", baseURL + "cart");
       console.log("Headers:", header);
       console.log("-------------");
-      const res = await axios.get(baseURL +"cart", { headers: header });
-      
-      console.log(res,"**********");
+      const res = await axios.get(baseURL +endpoint, { headers: header });
   
-      const bookData = res.data.data;
-  
-      return bookData;
+      return res;
     } 
     catch (error) {
       // Handle errors
@@ -61,7 +57,7 @@ export const getAllBooks = async (endpoint) => {
       console.log(response);
       const bookData = response.data;
   
-      return bookData;
+      return bookData; 
     } catch (error) {
       console.error("Error fetching books:", error);
       throw error;

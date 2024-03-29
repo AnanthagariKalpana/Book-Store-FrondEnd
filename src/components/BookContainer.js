@@ -4,8 +4,8 @@ import { Pagination, Select, MenuItem } from "@mui/material";
 import "../styles/BookContainer.scss";
 import { useNavigate } from 'react-router-dom';
 import BookCard from "./BookCard";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setBookData } from "../utils/redux-stores/BookSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setBookData } from "../utils/store-redux/BookSlice";
 
 
 const BookContainer = () => {
@@ -14,8 +14,8 @@ const BookContainer = () => {
   const booksPerPage = 8;
   const navigate = useNavigate();
   const [bookList, setBookList] = useState([]);
-  //const dispatch = useDispatch();
-  //const bookList = useSelector((store) => store.book.searchData);
+  const dispatch = useDispatch();
+  const booksList = useSelector((store) => store.book.searchData);
 
   const handleBookNavigate = (book) => {
     navigate(`/book/${book._id}`)
@@ -25,7 +25,7 @@ const BookContainer = () => {
     const fetchData = async () => {
       const res = await getAllBooks();
       console.log(res);
-      //   dispatch(setBookData(res.data.data))
+        dispatch(setBookData(res))
       setBookList([...res]);
     };
     fetchData();
@@ -52,12 +52,12 @@ const BookContainer = () => {
 
   let sortedList;
   if (selectedSort === "Price: low to high") {
-    sortedList = [...bookList].sort((a, b) => a.discountPrice - b.discountPrice);
+    sortedList = [...booksList].sort((a, b) => a.discountPrice - b.discountPrice);
   } else if (selectedSort === "Price: high to low") {
-    sortedList = [...bookList].sort((a, b) => b.discountPrice - a.discountPrice);
+    sortedList = [...booksList].sort((a, b) => b.discountPrice - a.discountPrice);
   }
   else {
-    sortedList = [...bookList]
+    sortedList = [...booksList]
   }
 
   console.log(bookList, "in state");

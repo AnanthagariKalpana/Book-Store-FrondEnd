@@ -7,8 +7,7 @@ import { Button } from "@mui/material";
 
 
 const Cart = () => {
-
-    const [cart, setCart] = useState([]);
+    const [cartData, setCartData] = useState([]);
     const navigate = useNavigate();
     const [isCart, setIsCart] = useState(false);
 
@@ -19,32 +18,31 @@ const Cart = () => {
 
         const fetchData = async () => {
             if (status) {
-                const res = await getCart("/card")
-                console.log(res, "111111111");
-                if(res.data?.bookItems)
-                {
-                    setCart(res.data.bookItems);
-                    if(res.data.bookItems.length>0)
-                    {
+                const res = await getCart("/cart")
+                if (res.data.data?.bookItems) {
+                    console.log(res.data.data.bookItems, "111111111");
+
+                    setCartData([...res.data.data.bookItems]);
+                    if (res.data.data.bookItems.length > 0) {
                         setIsCart(true);
                     }
                 }
             }
         };
         fetchData();
-    }, [cart]);
-
-
+    }, []);
+    console.log(cartData,"cartData");
+    
     return (
         <>
             <div className="main-cart">
                 <div className="cart-div">
                     <div className="cart-a">
-                        <span>My Cart ({cart.length})</span>
+                        <span>My Cart ({cartData.length})</span>
                         <div className="cart-disp">
                             {isCart ? (
-                                cart.map((book)=>(<CartCard key={book._id} book={book}/>)
-                            )):(
+                                cartData.map((book) => (<CartCard key={book._id} book={book} />)
+                                )) : (
                                 <div>
                                     <span>No Items in Cart</span>
                                 </div>
