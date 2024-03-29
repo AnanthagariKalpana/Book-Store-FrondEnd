@@ -7,27 +7,35 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import BookStore from './utils/store-redux/BookStore.js'
 import { Provider } from 'react-redux';
+import Wishlist from './components/Wishlist.js';
+
 
 const AppRoutes = createBrowserRouter([
   {
-    path:"/",
+    path:"/login",
       element:<Login/>
     },
     {
-    path :"dash",
+    path :"/",
     element : <Dashboard/>,
     children: [
       { 
-        path: "book", 
+        path: "/", 
         element: <BookContainer />
       },
       {
         path:"book/:_id",
         element:<BookInfo/>
-      },{
+      },
+      {
         path:"cart",
         element:<Cart/>
-      }
+      },
+      { 
+        path: "wishlist", 
+        element: <Wishlist /> 
+      },
+      
     ],
   },
   

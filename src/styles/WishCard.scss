@@ -1,0 +1,22 @@
+
+.wishcard-div{
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+}.wish-img{
+    display: flex;
+    width: 20%;
+    padding: 10px;
+    
+}
+.w-img {
+    width: 65px;
+    height: 85px;
+}
+.wish-details{
+    display: flex;
+    flex-direction: column;
+}
+.wishcard-b{
+    font-size: 18px;
+}

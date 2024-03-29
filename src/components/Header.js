@@ -8,14 +8,24 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import '../styles/Header.scss'
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
+import { Popper } from '@mui/material';
 
 const Header = () => {
 
+    const[user, setUser]=useState(false);
+    const [opend, setOpend] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
+    navigate();
+  };
+  const handleNavigate = (url) => {
+    navigate(url);
+  };
+  const handleClickOpen = () => {
+    setOpend(true);
   };
 
     return (
@@ -75,6 +85,22 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+            <Popper  anchorEl={anchorEl}>
+                <div>
+                    <span>welcome</span>
+                </div>
+                <div>
+                <div className="no-2-1" onClick={() => {
+                  handleNavigate("/profile");
+                  handleClick();
+                }}>
+                <PersonOutlineOutlinedIcon
+                  sx={{ color: "#878787", fontSize: "15px" }}
+                ></PersonOutlineOutlinedIcon>
+                <span className="txt-1">Profile</span>
+              </div>
+                </div>
+            </Popper>
         </div>
     )
 }

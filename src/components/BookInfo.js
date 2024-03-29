@@ -40,8 +40,11 @@ const BookInfo = () => {
     const handleCart = async () => {
         console.log("hhhhh");
         console.log(status);
+        const data = await updateCart(`/cart/${book._id}`);
+        console.log(data,"log");
         if (status) {
-            await updateCart(`/cart/${book._id}`);
+            // const data = await updateCart(`/cart/${book._id}`);
+           
         }   
     }
 

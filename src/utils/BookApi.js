@@ -29,15 +29,14 @@ export const getAllBooks = async (endpoint) => {
 
   export const getCart = async (endpoint) => {
     try {
-      const header = {
-        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+      const token = localStorage.getItem('Authorization');
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
+        }
       };
-
-      console.log("Attempting to fetch cart...");
-      console.log("Endpoint:", baseURL + "cart");
-      console.log("Headers:", header);
-      console.log("-------------");
-      const res = await axios.get(baseURL +endpoint, { headers: header });
+      const res = await axios.get(baseURL +endpoint, config);
   
       return res;
     } 
@@ -50,15 +49,39 @@ export const getAllBooks = async (endpoint) => {
 
   export const updateCart = async (endpoint) => {
     try {
-      const header = {
-        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+      const token = localStorage.getItem('Authorization');
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
+        }
       };
-      const response = await axios.post(baseURL + endpoint, {}, { headers: header } );
+      const response = await axios.post(baseURL + endpoint, {}, config );
       console.log(response);
       const bookData = response.data;
   
       return bookData; 
     } catch (error) {
+      console.error("Error fetching books:", error);
+      throw error;
+    }
+  };
+
+  export const getWishList = async (endpoint) => {
+    try {
+      const token = localStorage.getItem('Authorization');
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
+        }
+      };
+      const res = await axios.get(baseURL +endpoint, config);
+  
+      return res;
+    } 
+    catch (error) {
+      // Handle errors
       console.error("Error fetching books:", error);
       throw error;
     }

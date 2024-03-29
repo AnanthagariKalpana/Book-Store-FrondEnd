@@ -12,12 +12,11 @@ const Cart = () => {
     const [isCart, setIsCart] = useState(false);
 
 
-    const status = localStorage.getItem("Token") ? true : false;
+    // const status = localStorage.getItem("Token") ? true : false;
 
     useEffect(() => {
 
         const fetchData = async () => {
-            if (status) {
                 const res = await getCart("/cart")
                 if (res.data.data?.bookItems) {
                     console.log(res.data.data.bookItems, "111111111");
@@ -28,7 +27,6 @@ const Cart = () => {
                     }
                 }
             }
-        };
         fetchData();
     }, []);
     console.log(cartData,"cartData");
