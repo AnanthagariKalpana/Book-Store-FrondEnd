@@ -9,6 +9,7 @@ import '../styles/Header.scss'
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 import { Popper } from '@mui/material';
+import { logDOM } from '@testing-library/react';
 
 const Header = () => {
 
@@ -18,8 +19,8 @@ const Header = () => {
     const navigate = useNavigate();
 
   const handleClick = (event) => {
+    console.log("clickkkkkkkkk");
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    navigate();
   };
   const handleNavigate = (url) => {
     navigate(url);
@@ -27,6 +28,8 @@ const Header = () => {
   const handleClickOpen = () => {
     setOpend(true);
   };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
 
     return (
         <div>
@@ -85,7 +88,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <Popper  anchorEl={anchorEl}>
+            <Popper id={id} open={open}  anchorEl={anchorEl}>
                 <div>
                     <span>welcome</span>
                 </div>

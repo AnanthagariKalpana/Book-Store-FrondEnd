@@ -8,6 +8,7 @@ import Login from './components/Login';
 import BookStore from './utils/store-redux/BookStore.js'
 import { Provider } from 'react-redux';
 import Wishlist from './components/Wishlist.js';
+import Profile from './components/Profile.js';
 
 
 const AppRoutes = createBrowserRouter([
@@ -35,6 +36,10 @@ const AppRoutes = createBrowserRouter([
         path: "wishlist", 
         element: <Wishlist /> 
       },
+      ,{
+        path: "profile",
+        element:<Profile/>
+      }
       
     ],
   },
