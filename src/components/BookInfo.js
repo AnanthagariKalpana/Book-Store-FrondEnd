@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getBook, getCart, updateCart } from "../utils/BookApi";
+import { getBook, getCart, removeCart, updateCart } from "../utils/BookApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import Rating from '@mui/material/Rating';
-
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 
 import '../styles/BookInfo.scss';
+import { IconButton } from "@mui/material";
 
 
 const BookInfo = () => {
@@ -17,7 +19,8 @@ const BookInfo = () => {
     const books = useParams()
     console.log(books);
     const [book, setBook] = useState([]);
-    const[Quantity, setQuantity]=useState(1);
+    const [Quantity, setQuantity] = useState(1);
+    const [isAdd, setIsAdd] = useState(false);
     const navigate = useNavigate();
 
     const status = localStorage.getItem("Token") ? true : false;
@@ -31,21 +34,45 @@ const BookInfo = () => {
             setBook(res)
             if (status) {
                 const result = await getCart("/cart");
-                console.log(result,"000000000");
+                console.log(result, "000000000");
+                let cartData = result.data?.items;
+                const data = cartData?.filter(
+                    (ele) => ele.bookId === res.data?.data._id
+                );
+                if (data) {
+                    if (data[0]) {
+                        setIsAdd(true);
+                        setQuantity(data[0].quantity);
+                    }
+                }
             }
         }
         fetchData();
     }, []);
 
+    const increaseQuantity = () => {
+        if (book.quantity > Quantity) {
+            setQuantity(Quantity + 1);
+            handleCart();
+        }
+    };
+
+    const decreaseQuantity = () => {
+        if (Quantity > 1) {
+            setQuantity(Quantity - 1);
+        } else setIsAdd(false);
+        handleRemove();
+    };
+
+    const handleRemove = async () => {
+        await removeCart(`/cart/${books._id}`);
+    };
+
     const handleCart = async () => {
-        console.log("hhhhh");
-        console.log(status);
-        const data = await updateCart(`/cart/${book._id}`);
-        console.log(data,"log");
         if (status) {
-            // const data = await updateCart(`/cart/${book._id}`);
-           
-        }   
+            await updateCart(`/cart/${books._id}`);
+            if (!isAdd) setIsAdd(true);
+        }
     }
 
     return (
@@ -55,19 +82,39 @@ const BookInfo = () => {
                     <div className="b-div">
                         <img src={book.bookImage} alt="book" className="b-photo" />
                     </div>
-                    <div className="b-n">
-                        {status ? (
-                            <button className="cart-b" onClick={() => handleCart()}>
-                                Add to Cart
-                            </button>
-                        ) : (
-                            <button className="cart-b" onClick={() => handleCart()}>
-                                Add to Cart
-                            </button>
-                        )}
-                        <button className="wish-b"> <FavoriteIcon sx={{ fontSize: "15px", display: "flex", width: "15px" }}></FavoriteIcon>Wishlist</button>
-                        ,
+                    <div className="left-div-a">
+                        <div className="add-cart-div">
+                            {isAdd ? (
+                                <div className="as-button">
+                                    <IconButton onClick={decreaseQuantity}>
+                                        <RemoveIcon className="minus" />
+                                    </IconButton>
+                                    <span className="q-t">{Quantity}</span>
+                                    <IconButton onClick={increaseQuantity}>
+                                        <AddIcon className="plus" />
+                                    </IconButton>
+                                </div>
+                            ) : (
+                                <div className="b-n">
+                                    {status ? (
+                                        <button className="cart-b" onClick={() => handleCart()}>
+                                            Add to Cart
+                                        </button>
+                                    ) : (
+                                        <button className="cart-b" onClick={() => handleCart()}>
+                                            Add to Cart
+                                        </button>
+                                    )}
+                                    <button className="wish-b">
+                                        <FavoriteIcon
+                                            sx={{ fontSize: "15px", display: "flex", width: "15px" }}
+                                        >
+                                        </FavoriteIcon>Wishlist</button>
+                                </div>
+                            )}
+                        </div>
                     </div>
+
                 </div>
 
                 <div className="right-div">

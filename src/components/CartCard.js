@@ -11,6 +11,7 @@ const CartCard = ({ book }) => {
   console.log(book, "books");
   const [bookData, setBookData] = useState([]);
   const[Quantity, setQuantity]=useState(book.quantity);
+  const[isData, setIsData]= useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +32,7 @@ const CartCard = ({ book }) => {
     if(bookData.quantity> Quantity)
     {
       setQuantity( Quantity +1);
+      handle();
     }
   }
 
@@ -38,6 +40,9 @@ const CartCard = ({ book }) => {
     if(Quantity > 1)
     {
       setQuantity(Quantity - 1);
+    }
+    else{
+      setIsData(false)
     }
     handleRemove();
   }
@@ -51,12 +56,14 @@ const CartCard = ({ book }) => {
     for(let i=1;i<=quantity;i++){
       await handleRemove();
     }
+    setIsData(false)
   };
 
 
   return (
     <>
-      <div className="cartcard">
+      {isData ? (
+        <div className="cartcard">
         <div className="cartcard-img">
           <img src={book.bookImage} alt="book" className="c-img" />
         </div>
@@ -84,6 +91,9 @@ const CartCard = ({ book }) => {
           </div>
         </div>
       </div>
+      ):(
+        <div></div>
+      )}
     </>
   )
 }

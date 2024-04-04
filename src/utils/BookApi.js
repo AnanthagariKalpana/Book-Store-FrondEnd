@@ -87,6 +87,26 @@ export const getAllBooks = async (endpoint) => {
     }
   };
 
+  export const deleteCart = async (endpoint) => {
+    try {
+      const token = localStorage.getItem('Token');
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
+        }
+      };
+      const response = await axios.delete(baseURL + endpoint,  config );
+      console.log(response);
+      const bookData = response.data;
+  
+      return bookData; 
+    } catch (error) {
+      console.error("Error fetching books:", error);
+      throw error;
+    }
+  };
+
   export const getWishList = async (endpoint) => {
     try {
       const token = localStorage.getItem('Token');
