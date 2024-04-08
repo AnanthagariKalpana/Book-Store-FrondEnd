@@ -118,10 +118,32 @@ export const getAllBooks = async (endpoint) => {
       };
       const res = await axios.get(baseURL +endpoint, config);
   
-      return res;
+      const bookData = res.data;
+  
+      return bookData; 
     } 
     catch (error) {
       // Handle errors
+      console.error("Error fetching books:", error);
+      throw error;
+    }
+  };
+
+  export const updateWishlist = async (endpoint) => {
+    try {
+      const token = localStorage.getItem('Token');
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`,
+          'Content-Type':  'application/json'
+        }
+      };
+      const response = await axios.post(baseURL + endpoint, {}, config );
+      console.log(response);
+      const bookData = response.data;
+  
+      return bookData; 
+    } catch (error) {
       console.error("Error fetching books:", error);
       throw error;
     }

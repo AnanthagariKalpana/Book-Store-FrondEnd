@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBook, getCart, removeCart, updateCart } from "../utils/BookApi";
+import { getBook, getCart, getWishList, removeCart, updateCart, updateWishlist } from "../utils/BookApi";
 import { useNavigate, useParams } from "react-router-dom";
 
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
@@ -21,6 +21,9 @@ const BookInfo = () => {
     const [book, setBook] = useState([]);
     const [Quantity, setQuantity] = useState(1);
     const [isAdd, setIsAdd] = useState(false);
+    const [opend, setOpend] = useState(false);
+    const[isWish, setIsWish]=useState(false);
+
     const navigate = useNavigate();
 
     const status = localStorage.getItem("Token") ? true : false;
@@ -46,9 +49,28 @@ const BookInfo = () => {
                     }
                 }
             }
+            if(status)
+            {
+                const wList=await getWishList("/wishlist");
+                let wishData = wList.data?.items;
+                const wish = wishData?.filter(
+                    (ele) => ele.bookId === res.data?.data._id
+                );
+                if(wish){
+                    if(wish[0])
+                    {
+                        setIsWish(true)
+                    }
+                }
+
+            }
         }
         fetchData();
     }, []);
+
+    const handleClick=()=>{
+        setOpend(true);
+    }
 
     const increaseQuantity = () => {
         if (book.quantity > Quantity) {
@@ -70,9 +92,16 @@ const BookInfo = () => {
 
     const handleCart = async () => {
         if (status) {
+            console.log(status);
             await updateCart(`/cart/${books._id}`);
-            if (!isAdd) setIsAdd(true);
+            if (!isAdd) {
+            setIsAdd(true);
+            }
         }
+    }
+
+    const handleWish= async()=>{
+        await updateWishlist(`/wishlist/${books._id}`);
     }
 
     return (
@@ -101,11 +130,11 @@ const BookInfo = () => {
                                             Add to Cart
                                         </button>
                                     ) : (
-                                        <button className="cart-b" onClick={() => handleCart()}>
+                                        <button className="cart-b" onClick={() => handleClick()}>
                                             Add to Cart
                                         </button>
                                     )}
-                                    <button className="wish-b">
+                                    <button className="wish-b" onClick={()=> handleWish()}>
                                         <FavoriteIcon
                                             sx={{ fontSize: "15px", display: "flex", width: "15px" }}
                                         >

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getBook } from "../utils/BookApi";
+import { getBook, updateWishlist } from "../utils/BookApi";
 import '../styles/WishCard.scss';
 
 const WishCard = ({ book }) => {
@@ -12,6 +12,10 @@ const WishCard = ({ book }) => {
         }
         fetchData();
     }, [])
+
+    const handle =async()=>{
+        await updateWishlist(`wishlist/${book.bookId}`)
+    }
 
     return (
         <div>

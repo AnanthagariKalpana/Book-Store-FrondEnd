@@ -13,7 +13,7 @@ import { ShoppingBagOutlined } from '@mui/icons-material';
 
 const Header = () => {
 
-    const [user, setUser] = useState(false);
+    //const [user, setUser] = useState(false);
     const [opend, setOpend] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedValue, setSelectedValue] = useState();
@@ -101,7 +101,7 @@ const Header = () => {
             </div>
             <Popper id={id} open={open} anchorEl={anchorEl}>
                 <div className='prof-list'>
-                    <div>
+                    <div onClick={()=>handleNavigate("/login")}>
                         <span>welcome</span>
                     </div>
                     <div>

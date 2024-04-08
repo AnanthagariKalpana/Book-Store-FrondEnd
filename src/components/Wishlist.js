@@ -15,12 +15,12 @@ const Wishlist = () => {
         const fetchData = async () => {
             const res = await getWishList("/wishlist");
             console.log(res, "wishhh");
-            if (res.data.data?.bookItems) {
-                console.log(res.data.data.bookItems, "111111111");
+            if (res.data?.bookItems) {
+                console.log(res.data.bookItems, "111111111");
 
-                setWishData(res.data.data.bookItems);
+                setWishData(res.data.bookItems);
 
-                if (res.data.data.bookItems.length > 0) {
+                if (res.data.bookItems.length > 0) {
                     setIsWish(true);
                 }
             }
